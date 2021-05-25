@@ -37,7 +37,6 @@ public class IntList {
      * Returns a list equal to L with all elements squared. Destructive.
      */
     public static void dSquareList(IntList L) {
-
         while (L != null) {
             L.first = L.first * L.first;
             L = L.rest;
@@ -81,8 +80,17 @@ public class IntList {
      */
 
     public static IntList dcatenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        //corner case: if A is empty
+        if (A == null) {
+            return B;
+        }
+        //otherwise return A + B
+        IntList p = A;
+        while (A.rest != null) {
+            A = A.rest;
+        }
+        A.rest = B;
+        return p;
     }
 
     /**
@@ -90,8 +98,38 @@ public class IntList {
      * * elements of B.  May NOT modify items of A.  Use 'new'.
      */
     public static IntList catenate(IntList A, IntList B) {
-        //TODO:  fill in method
-        return null;
+        //corner case: if A is empty
+        if (A == null) {
+            return B;
+        }
+        //create a new list
+        IntList AB = new IntList(A.first, null); //new list to store result
+        IntList p = A.rest; //a pointer for list A
+        IntList AB_p = AB; //pointer for result list
+        while (p != null) {
+            AB_p.rest = new IntList(p.first, null);
+            p = p.rest;
+            AB_p = AB_p.rest;
+        }
+        AB_p.rest = B;
+
+        return AB;
+    }
+
+    /**
+     * Returns a list of elements contains both elements from A and B.
+     * Do not modify original list A. Use "new".
+     * @param A
+     * @param B
+     * @return IntList
+     */
+    public static IntList catenate_recursive(IntList A, IntList B) {
+        //base case: A is empty
+        if (A == null) {
+            return B;
+        }
+        return new IntList(A.first, catenate_recursive(A.rest, B));
+
     }
 
 

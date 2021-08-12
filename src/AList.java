@@ -7,11 +7,11 @@ addLast: the next item we want to add, will go into position [size]
 getLast: the item we want to return is in position [size - 1]
 size: the number of items in the list should be size
  */
-
-public class AList<Item> implements List61B<Item>{
+public class AList<Item> implements List61B<Item> {
     //define our private variables
     private Item[] items;
     private int size;
+
 
     /*Creates an empty list*/
     public AList() {

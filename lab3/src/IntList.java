@@ -11,11 +11,11 @@ public class IntList {
     /**
      * First element of list.
      */
-    public int first;
+    private int first;
     /**
      * Remaining elements of list.
      */
-    public IntList rest;
+    private IntList rest;
 
     /**
      * A List with first FIRST0 and rest REST0.
@@ -86,11 +86,11 @@ public class IntList {
         }
         //otherwise return A + B
         IntList p = A;
-        while (A.rest != null) {
-            A = A.rest;
+        while (p.rest != null) {
+            p = p.rest;
         }
-        A.rest = B;
-        return p;
+        p.rest = B;
+        return A;
     }
 
     /**
@@ -103,17 +103,17 @@ public class IntList {
             return B;
         }
         //create a new list
-        IntList AB = new IntList(A.first, null); //new list to store result
+        IntList catenateAB = new IntList(A.first, null); //new list to store result
         IntList p = A.rest; //a pointer for list A
-        IntList AB_p = AB; //pointer for result list
+        IntList pCatenate = catenateAB; //pointer for result list
         while (p != null) {
-            AB_p.rest = new IntList(p.first, null);
+            pCatenate.rest = new IntList(p.first, null);
             p = p.rest;
-            AB_p = AB_p.rest;
+            pCatenate = pCatenate.rest;
         }
-        AB_p.rest = B;
+        pCatenate.rest = B;
 
-        return AB;
+        return catenateAB;
     }
 
     /**
@@ -123,25 +123,38 @@ public class IntList {
      * @param B
      * @return IntList
      */
-    public static IntList catenate_recursive(IntList A, IntList B) {
+    public static IntList catenateRecursive(IntList A, IntList B) {
         //base case: A is empty
         if (A == null) {
             return B;
         }
-        return new IntList(A.first, catenate_recursive(A.rest, B));
+        return new IntList(A.first, catenateRecursive(A.rest, B));
 
     }
 
+    /**
+     * Returns the reverse of the given IntList.
+     * This method is destructive. If given null
+     * as an input, returns null.
+     */
+    public static IntList reverse(IntList A) {
+        //if input is null, return null
+        if (A == null) {
+            return null;
+        }
 
-
-
-
-
-
-
-
-
-
+        //use a pointer to loop through A
+        IntList p = A.rest;
+        A.rest = null; //first becomes the last
+        while (p != null) {
+            IntList temp = p.rest;
+            p.rest = new IntList(A.first, A.rest);
+            A.first = p.first;
+            A.rest = p.rest;
+            p = temp;
+        }
+        return A;
+    }
 
 
 

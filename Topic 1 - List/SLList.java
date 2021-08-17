@@ -165,9 +165,9 @@ public class SLList<Item> implements List61B<Item>{
     }
 
 
-    //how to use
+    /**
     public static void main(String[] args) {
-        /**
+
         SLList L = new SLList(15);
         L.addFirst(10);
         L.addFirst(5);
@@ -175,9 +175,10 @@ public class SLList<Item> implements List61B<Item>{
         //int x = L.getFirst();
         L.deleteFirst();
         //int y = L.getFirst();
-        */
+
         SLList L = new SLList(new int[] {1, 2, 3});
         System.out.println(L.getFirst());
         System.out.println(L.size());
     }
+    */
 }
